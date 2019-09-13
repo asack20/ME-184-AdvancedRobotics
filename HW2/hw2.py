@@ -30,9 +30,13 @@ kit = ServoKit(channels=16)
 def main(args):
     while True:
         print(time.localtime())
-        kit.servo[0].angle = 180
+        kit.continuous_servo[0].throttle = 1
         time.sleep(2)
-        kit.servo[0].angle = 0
+        kit.continuous_servo[0].throttle = 0
+        time.sleep(2)
+        kit.continuous_servo[0].throttle = -1
+        time.sleep(2)
+        kit.continuous_servo[0].throttle = 0
         time.sleep(2)
     return 0
 
