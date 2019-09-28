@@ -18,7 +18,7 @@ arm1 = kit.servo[0];
 arm2 = kit.servo[1];
 pen = kit.servo[3]
 
-filename = sys.argv[0];
+filename = sys.argv[1];
 if len(sys.argv) != 2:
     sys.exit("Incorrect number of arguments")
 
@@ -39,7 +39,6 @@ size = len(data)
 # for each line of file (element in data)
 for i in range(0, size):
     line = data[i].split('\t'); # split line up by tabs
-    # append values to lists
     x_pos_temp.append(float(line[0])) 
     y_pos_temp.append(float(line[1]))
     isWrite_temp.append(bool(line[2]))
