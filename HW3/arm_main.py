@@ -74,7 +74,7 @@ print('done')
 
 print('Running motion...')
 theta_3_prev = 0;
-for i in range(0, theta_1):
+for i in range(0, len(theta_1)):
     if True:    
         print('Step: ' + str(i))
         print('\t X Pos: '+ str(x_pos[i]))
@@ -83,7 +83,7 @@ for i in range(0, theta_1):
         print('\t Arm 2: '+ str(theta_2[i]))
         print('\t Pen: '+ str(isWrite[i]))
 
-    if theta_3[i] != theta_3_prev:
+    if (theta_3[i] != theta_3_prev):
         pen.angle = theta_3[i]
         sleep(0.5)
     theta_3_prev = theta_3[i]
