@@ -71,9 +71,18 @@ theta_3 = 90*isWrite
 
 print('done')
 
+print('Initializing arm postion...', end='')
+prev_1 = 0
+prev_2 = 0
+prev_3 = 0
+arm1.angle = prev_1
+arm2.angle = prev_2
+pen.angle = prev_3
+sleep(3)
+print('done')
+
 
 print('Running motion...')
-theta_3_prev = 0;
 for i in range(0, len(theta_1)):
     if True:    
         print('Step: ' + str(i))
@@ -83,12 +92,23 @@ for i in range(0, len(theta_1)):
         print('\t Arm 2: '+ str(theta_2[i]))
         print('\t Pen: '+ str(isWrite[i]))
 
-    if (theta_3[i] != theta_3_prev):
-        #pen.angle = theta_3[i]
+    if (theta_3[i] != prev_3):
+        pen.angle = theta_3[i]
         sleep(0.5)
-    #theta_3_prev = theta_3[i]
-    #arm1.angle = theta_1[i]
-    #arm2.angle = theta_2[i]
-    sleep(0.5)
+    
+    delta_1 = theta_1[i] - prev_1
+    delta_2 = theta_2[i] - prev_2
+
+    delta_max = max(abs(delta_1), abs(delta_2))
+    t_sleep = delta_max / 300
+
+    arm1.angle = theta_1[i]
+    arm2.angle = theta_2[i]
+
+    prev_1 = theta_1[i]
+    prev_2 = theta_2[i]
+    prev_3 = theta_3[i]
+    
+    sleep(t_sleep)
 
 print('done')
