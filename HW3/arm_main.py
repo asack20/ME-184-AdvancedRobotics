@@ -84,11 +84,11 @@ for i in range(0, len(theta_1)):
         print('\t Pen: '+ str(isWrite[i]))
 
     if (theta_3[i] != theta_3_prev):
-        pen.angle = theta_3[i]
+        #pen.angle = theta_3[i]
         sleep(0.5)
-    theta_3_prev = theta_3[i]
-    arm1.angle = theta_1[i]
-    arm2.angle = theta_2[i]
+    #theta_3_prev = theta_3[i]
+    #arm1.angle = theta_1[i]
+    #arm2.angle = theta_2[i]
     sleep(0.5)
 
 print('done')
