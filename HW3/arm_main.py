@@ -41,7 +41,7 @@ for i in range(0, size):
     line = data[i].split('\t'); # split line up by tabs
     x_pos_temp.append(float(line[0])) 
     y_pos_temp.append(float(line[1]))
-    isWrite_temp.append(bool(line[2]))
+    isWrite_temp.append(bool(int(line[2])))
 # end for
 
 
@@ -94,7 +94,7 @@ for i in range(0, len(theta_1)):
 
     if (theta_3[i] != prev_3):
         pen.angle = theta_3[i]
-        sleep(0.5)
+        sleep(1)
     
     delta_1 = theta_1[i] - prev_1
     delta_2 = theta_2[i] - prev_2
@@ -102,8 +102,8 @@ for i in range(0, len(theta_1)):
     delta_max = max(abs(delta_1), abs(delta_2))
     t_sleep = delta_max / 300
 
-    arm1.angle = theta_1[i] 
-    arm2.angle = theta_2[i] 
+    arm1.angle = theta_1[i] % 180
+    arm2.angle = theta_2[i] % 180
 
     prev_1 = theta_1[i]
     prev_2 = theta_2[i]
