@@ -72,8 +72,8 @@ theta_3 = 90*isWrite
 print('done')
 
 print('Initializing arm postion...', end='')
-prev_1 = 0
-prev_2 = 0
+prev_1 = 90
+prev_2 = 90
 prev_3 = 0
 arm1.angle = prev_1
 arm2.angle = prev_2
