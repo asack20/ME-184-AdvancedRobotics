@@ -59,7 +59,7 @@ x_pos = np.array()
 y_pos = np.array()
 for i in range(0, len(x_in)-1):
     x_interp = np.linspace(x_in[i],x_in[i+1], 50)
-    y_interp = np.interp(x_interp, [x_in[i] x_in[i+1]],[y_in[i] y_in[i+1]])
+    y_interp = np.interp(x_interp, [x_in[i], x_in[i+1]],[y_in[i], y_in[i+1]])
     np.append(x_pos, x_interp)
     np.append(y_pos, y_interp)
 
