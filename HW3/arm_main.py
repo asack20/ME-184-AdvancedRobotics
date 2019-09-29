@@ -54,7 +54,7 @@ print('done')
 
 print('Interpolating more coordinates...', end='')
 
-
+print(len(x_in))
 x_pos = np.array([])
 y_pos = np.array([])
 for i in range(0, len(x_in)-1):
@@ -67,6 +67,8 @@ print('done')
 
 isWrite = np.full(np.size(x_pos), True)
 
+
+print(len(x_pos))
 print('Calculating servo target angles...', end='')
 
 # calculate motor angles from position all in radians
