@@ -45,11 +45,27 @@ for i in range(0, size):
 # end for
 
 
-x_pos = np.array(x_pos_temp)
-y_pos = np.array(y_pos_temp)
+x_in = np.array(x_pos_temp)
+y_in = np.array(y_pos_temp)
 isWrite = np.array(isWrite_temp)
 
 print('done')
+
+
+print('Interpolating more coordinates...', end='')
+
+
+x_pos = np.array()
+y_pos = np.array()
+for i in range(0, len(x_in)-1):
+    x_interp = np.linspace(x_in[i],x_in[i+1], 50)
+    y_interp = np.interp(x_interp, [x_in[i] x_in[i+1]],[y_in[i] y_in[i+1]])
+    np.append(x_pos, x_interp)
+    np.append(y_pos, y_interp)
+
+print('done')
+
+isWrite = np.full(np.size(x_pos), True)
 
 print('Calculating servo target angles...', end='')
 
