@@ -45,30 +45,30 @@ for i in range(0, size):
 # end for
 
 
-x_in = np.array(x_pos_temp)
-y_in = np.array(y_pos_temp)
+x_pos = np.array(x_pos_temp)
+y_pos = np.array(y_pos_temp)
 isWrite = np.array(isWrite_temp)
 
 print('done')
 
 
-print('Interpolating more coordinates...', end='')
+# print('Interpolating more coordinates...', end='')
 
-print(len(x_in))
-x_pos = np.array(x_in[0])
-y_pos = np.array(y_in[0])
-for i in range(0, len(x_in)-1):
-    x_interp = np.linspace(x_in[i],x_in[i+1], 50)
-    y_interp = np.interp(x_interp, [x_in[i], x_in[i+1]],[y_in[i], y_in[i+1]])
-    x_pos.append(x_pos, x_interp)
-    y_pos.append(y_pos, y_interp)
+# print(len(x_in))
+# x_pos = np.array(x_in[0])
+# y_pos = np.array(y_in[0])
+# for i in range(0, len(x_in)-1):
+#     x_interp = np.linspace(x_in[i],x_in[i+1], 50)
+#     y_interp = np.interp(x_interp, [x_in[i], x_in[i+1]],[y_in[i], y_in[i+1]])
+#     x_pos.append(x_pos, x_interp)
+#     y_pos.append(y_pos, y_interp)
 
-print('done')
+# print('done')
 
-isWrite = np.full(np.size(x_pos), True)
+# isWrite = np.full(np.size(x_pos), True)
 
 
-print(len(x_pos))
+# print(len(x_pos))
 print('Calculating servo target angles...', end='')
 
 # calculate motor angles from position all in radians
