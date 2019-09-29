@@ -10,8 +10,8 @@ kit = ServoKit(channels=16) #specify model being used (16 port version)
 
 
 #Parameters
-l1 = 10; #inches
-l2 = 10; #inches
+l1 = 6.48; #inches
+l2 = 6.48; #inches
 
 
 arm1 = kit.servo[0];
@@ -102,8 +102,8 @@ for i in range(0, len(theta_1)):
     delta_max = max(abs(delta_1), abs(delta_2))
     t_sleep = delta_max / 300
 
-    arm1.angle = theta_1[i] % 180
-    arm2.angle = theta_2[i] % 180
+    arm1.angle = theta_1[i] 
+    arm2.angle = theta_2[i] 
 
     prev_1 = theta_1[i]
     prev_2 = theta_2[i]
