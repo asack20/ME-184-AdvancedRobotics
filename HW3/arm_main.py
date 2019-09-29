@@ -102,13 +102,13 @@ for i in range(0, len(theta_1)):
     delta_max = max(abs(delta_1), abs(delta_2))
     t_sleep = delta_max / 300
 
-    arm1.angle = theta_1[i] % 180
-    arm2.angle = theta_2[i] % 180
+    arm1.angle = theta_1[i] - 90
+    arm2.angle = theta_2[i] + 90
 
     prev_1 = theta_1[i]
     prev_2 = theta_2[i]
     prev_3 = theta_3[i]
     
-    sleep(t_sleep)
+    sleep(1)
 
 print('done')
