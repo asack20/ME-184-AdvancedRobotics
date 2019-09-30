@@ -133,7 +133,7 @@ for i in range(0, len(x_pos)):
         print('Step: ' + str(i))
         print('\t X Pos: '+ str(x_pos[i]))
         print('\t Y Pos: '+ str(y_pos[i]))
-        print('\t Arm 1: '+ str(theta_1) + '\t' + str(theta_1-90))
+        print('\t Arm 1: '+ str(theta_1) + '\t' + str(theta_1+90))
         print('\t Arm 2: '+ str(theta_2) + '\t' +str(180 + (theta_2) ))
         print('\t Pen: '+ str(isWrite[i]))
 
@@ -141,7 +141,7 @@ for i in range(0, len(x_pos)):
         pen.angle = theta_3
         sleep(1)  
 
-    arm1.angle = theta_1 -90
+    arm1.angle = theta_1 + 90
     arm2.angle = 180 + (theta_2 ) 
 
     prev_1 = theta_1
