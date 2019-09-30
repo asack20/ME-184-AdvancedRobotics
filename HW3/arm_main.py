@@ -70,9 +70,9 @@ for i in range(0, len(x_in)-1):
         y_pos = y_interp
         isWrite = write_interp
     else:
-        np.concatenate((x_pos, x_interp), axis=None)
-        np.concatenate((y_pos, y_interp), axis=None)
-        np.concatenate((isWrite, write_interp), axis=None)
+        x_pos = np.concatenate((x_pos, x_interp), axis=None)
+        y_pos = np.concatenate((y_pos, y_interp), axis=None)
+        isWrite = np.concatenate((isWrite, write_interp), axis=None)
 
 print('done')
 #isWrite = np.full(np.size(x_pos), True)
