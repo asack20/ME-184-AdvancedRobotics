@@ -55,7 +55,7 @@ print('done')
 
 
 print('Interpolating more coordinates...', end='')
-n_steps = 50
+n_steps = 10
 
 print(len(x_in))
 #x_pos = np.array(x_in[0])
@@ -63,16 +63,18 @@ print(len(x_in))
 for i in range(0, len(x_in)-1):
     x_interp = np.linspace(x_in[i],x_in[i+1], n_steps)
     y_interp = np.linspace(y_in[i],y_in[i+1], n_steps)
+    write_interp = np.full(x_interp.size, isWrite[i+1])
     if i == 0:
         x_pos = x_interp
         y_pos = y_interp
+        isWrite = write_interp
     else:
-        np.concatenate((x_pos, x_interp))
-        np.concatenate((y_pos, y_interp))
+        x_pos.append(x_interp)
+        y_pos.append(y_interp)
+        isWrite.append(write_interp)
 
 print('done')
-
-isWrite = np.full(np.size(x_pos), True)
+#isWrite = np.full(np.size(x_pos), True)
 
 
 print(x_pos.size)
@@ -122,9 +124,6 @@ for i in range(0, len(x_pos)):
     sin_2 = m.sqrt(1 - cos_2**2)
     theta_2 = m.degrees(m.atan2(sin_2,cos_2))
 
-
-    #sin_1 = ((l1 + l2*cos_2)*y_pos[i] - (l2*sin_2*x_pos[i])) / (x_pos[i]**2 + y_pos[i]**2)
-    #cos_1 = ((l1 + l2*cos_2)*x_pos[i] - (l2*sin_2*y_pos[i])) / (x_pos[i]**2 + y_pos[i]**2)
     theta_1 = m.degrees(m.atan2(y_pos[i],x_pos[i]) - m.atan2(l2*sin_2,l1+l2*cos_2))
         
     
@@ -149,6 +148,6 @@ for i in range(0, len(x_pos)):
     prev_2 = theta_2
     prev_3 = theta_3
     
-    sleep(0.5)
+    sleep(0.1)
 
 print('done')
