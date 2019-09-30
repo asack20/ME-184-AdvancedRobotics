@@ -142,8 +142,8 @@ for i in range(0, len(x_pos)):
         pen.angle = theta_3
         sleep(1)  
 
-    arm1.angle = theta_1 + 90
-    arm2.angle = 180 + (theta_2 ) 
+    arm1.angle = theta_1
+    arm2.angle = theta_2 
 
     prev_1 = theta_1
     prev_2 = theta_2
