@@ -134,7 +134,7 @@ for i in range(0, len(x_pos)):
     delta_max = max(abs(delta_1), abs(delta_2))
     t_sleep = delta_max / 300
 
-    arm1.angle = theta_1[i]
+    arm1.angle = theta_1[i] -90
     arm2.angle = 180 - (theta_2[i] + 90) 
 
     prev_1 = theta_1[i]
