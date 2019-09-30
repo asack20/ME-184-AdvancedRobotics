@@ -14,9 +14,9 @@ l1 = 6.48; #inches
 l2 = 6.48; #inches
 
 
-arm1 = kit.servo[0];
-arm2 = kit.servo[1];
-pen = kit.servo[2]
+#arm1 = kit.servo[0];
+#arm2 = kit.servo[1];
+#pen = kit.servo[2]
 
 filename = sys.argv[1];
 if len(sys.argv) != 2:
@@ -56,13 +56,17 @@ print('Interpolating more coordinates...', end='')
 n_steps = 50
 
 print(len(x_in))
-x_pos = np.array(x_in[0])
-y_pos = np.array(y_in[0])
+#x_pos = np.array(x_in[0])
+#y_pos = np.array(y_in[0])
 for i in range(0, len(x_in)-1):
     x_interp = np.linspace(x_in[i],x_in[i+1], n_steps)
     y_interp = np.linspace(y_in[i],y_in[i+1], n_steps)
-    np.append(x_pos, x_interp)
-    np.append(y_pos, y_interp)
+    if i == 0:
+        x_pos = x_interp
+        y_pos = y_interp
+    else:
+        np.concatenate((x_pos, x_interp))
+        np.concatenate((y_pos, y_interp))
 
 print('done')
 
@@ -111,7 +115,7 @@ print('done')
 
 
 print('Running motion...')
-for i in range(0, theta_1.size):
+for i in range(0, len(x_pos)):
     if True:    
         print('Step: ' + str(i))
         print('\t X Pos: '+ str(x_pos[i]))
@@ -137,6 +141,6 @@ for i in range(0, theta_1.size):
     prev_2 = theta_2[i]
     prev_3 = theta_3[i]
     
-    sleep(1)
+    sleep(0.2)
 
 print('done')
