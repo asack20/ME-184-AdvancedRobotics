@@ -58,6 +58,7 @@ print('Interpolating more coordinates...', end='')
 n_steps = 10
 
 print(len(x_in))
+print(len(isWrite))
 #x_pos = np.array(x_in[0])
 #y_pos = np.array(y_in[0])
 for i in range(0, len(x_in)-1):
