@@ -49,7 +49,7 @@ for i in range(0, size):
 
 x_in = np.array(x_pos_temp)
 y_in = np.array(y_pos_temp)
-isWrite = np.array(isWrite_temp)
+write_In = np.array(isWrite_temp)
 
 print('done')
 
@@ -58,13 +58,13 @@ print('Interpolating more coordinates...', end='')
 n_steps = 10
 
 print(len(x_in))
-print(len(isWrite))
+
 #x_pos = np.array(x_in[0])
 #y_pos = np.array(y_in[0])
 for i in range(0, len(x_in)-1):
     x_interp = np.linspace(x_in[i],x_in[i+1], n_steps)
     y_interp = np.linspace(y_in[i],y_in[i+1], n_steps)
-    write_interp = np.full(x_interp.size, isWrite[i])
+    write_interp = np.full(x_interp.size, write_In[i])
     if i == 0:
         x_pos = x_interp
         y_pos = y_interp
@@ -142,8 +142,8 @@ for i in range(0, len(x_pos)):
         pen.angle = theta_3
         sleep(1)  
 
-    arm1.angle = theta_1
-    arm2.angle = theta_2 
+    arm1.angle = theta_1 % 180
+    arm2.angle = theta_2 % 180
 
     prev_1 = theta_1
     prev_2 = theta_2
