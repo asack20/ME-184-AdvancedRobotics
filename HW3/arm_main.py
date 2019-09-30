@@ -45,8 +45,8 @@ for i in range(0, size):
 # end for
 
 
-x_pos = np.array(x_pos_temp)
-y_pos = np.array(y_pos_temp)
+x_in = np.array(x_pos_temp)
+y_in = np.array(y_pos_temp)
 isWrite = np.array(isWrite_temp)
 
 print('done')
