@@ -138,7 +138,7 @@ for i in range(0, len(x_pos)):
         print('\t Pen: '+ str(isWrite[i]))
 
     if (theta_3 != prev_3):
-        pen.angle = theta_3[i]
+        pen.angle = theta_3
         sleep(1)  
 
     arm1.angle = theta_1[i] -90
