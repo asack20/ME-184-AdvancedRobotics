@@ -77,13 +77,13 @@ isWrite = np.full(np.size(x_pos), True)
 print(x_pos.size)
 print('Calculating servo target angles...', end='')
 
-cos_2 = (np.square(x_pos) + np.square(y_pos) - np.square(l1) - np.square(l2))/(2*l1*l2)
-sin_2 = -np.sqrt(1-np.square(cos_2))
-theta_2 = np.degrees(np.arctan2(sin_2,cos_2))
+# cos_2 = (np.square(x_pos) + np.square(y_pos) - np.square(l1) - np.square(l2))/(2*l1*l2)
+# sin_2 = -np.sqrt(1-np.square(cos_2))
+# theta_2 = np.degrees(np.arctan2(sin_2,cos_2))
 
-sin_1 = ((l1 + l2*cos_2)*y_pos - (l2*sin_2*x_pos)) / (np.square(x_pos) + np.square(y_pos))
-cos_1 = ((l1 + l2*cos_2)*x_pos - (l2*sin_2*y_pos)) / (np.square(x_pos) + np.square(y_pos))
-theta_1 = np.degrees(np.arctan2(sin_1,cos_1))
+# sin_1 = ((l1 + l2*cos_2)*y_pos - (l2*sin_2*x_pos)) / (np.square(x_pos) + np.square(y_pos))
+# cos_1 = ((l1 + l2*cos_2)*x_pos - (l2*sin_2*y_pos)) / (np.square(x_pos) + np.square(y_pos))
+# theta_1 = np.degrees(np.arctan2(sin_1,cos_1))
 
 # ###
 # # calculate motor angles from position all in radians
@@ -117,31 +117,45 @@ print('done')
 
 print('Running motion...')
 for i in range(0, len(x_pos)):
+    cos_2 = (x_pos[i]**2 + y_pos[i]**2 - l1**2 - l2**2)/(2*l1*l2)
+    sin_2 = -m.sqrt(1 - cos_2**2)
+    theta_2 = m.degrees(m.atan2(sin_2,cos_2))
+
+    sin_1 = ((l1 + l2*cos_2)*y_pos[i] - (l2*sin_2*x_pos[i])) / (x_pos[i]**2 + y_pos[i]**2)
+    cos_1 = ((l1 + l2*cos_2)*x_pos[i] - (l2*sin_2*y_pos[i])) / (x_pos[i]**2 + y_pos[i]**2)
+    theta_1 = m.degrees(m.atan2(sin_1,cos_1))
+        
+    
+    theta_3 = 90*isWrite[i]
+    
     if True:    
         print('Step: ' + str(i))
         print('\t X Pos: '+ str(x_pos[i]))
         print('\t Y Pos: '+ str(y_pos[i]))
-        print('\t Arm 1: '+ str(theta_1[i]) + '\t' + str(theta_1[i]-90))
-        print('\t Arm 2: '+ str(theta_2[i]) + '\t' +str(180 - (theta_2[i] + 90) ))
+        print('\t Arm 1: '+ str(theta_1) + '\t' + str(theta_1-90))
+        print('\t Arm 2: '+ str(theta_2) + '\t' +str(180 + (theta_2) ))
         print('\t Pen: '+ str(isWrite[i]))
 
-    if (theta_3[i] != prev_3):
-        pen.angle = theta_3[i]
-        sleep(1)
+    if (theta_3 != prev_3):
+        #pen.angle = theta_3[i]
+        sleep(1)  
+
+    x1 = l1 * m.cos(m.radians(theta_1))
+    y1 = l1 * m.sin(m.radians(theta_1))
+    x2 = x1 + l2 * m.cos(m.radians(theta_1)+m.radians(theta_2))
+    y2 = y1 + l2 * m.sin(m.radians(theta_1)+m.radians(theta_2))
     
-    delta_1 = theta_1[i] - prev_1
-    delta_2 = theta_2[i] - prev_2
-
-    delta_max = max(abs(delta_1), abs(delta_2))
-    t_sleep = delta_max / 300
-
-    arm1.angle = theta_1[i] + 90
-    arm2.angle = 180 + theta_2[i] 
-
-    prev_1 = theta_1[i]
-    prev_2 = theta_2[i]
-    prev_3 = theta_3[i]
+    x_plt = [0, x1, x2]
+    y_plt = [0, y1, y2]
+    plt.plot(x_plt, y_plt)
     
-    sleep(0.2)
+    arm1.angle = theta_1[i] -90
+    arm2.angle = 180 + (theta_2[i] ) 
+
+    prev_1 = theta_1
+    prev_2 = theta_2
+    prev_3 = theta_3
+    
+    sleep(0.5)
 
 print('done')
