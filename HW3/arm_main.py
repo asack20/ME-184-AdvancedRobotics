@@ -111,7 +111,7 @@ print('done')
 
 
 print('Running motion...')
-for i in range(0, len(theta_1)):
+for i in range(0, theta_1.size):
     if True:    
         print('Step: ' + str(i))
         print('\t X Pos: '+ str(x_pos[i]))
