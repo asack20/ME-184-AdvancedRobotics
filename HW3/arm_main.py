@@ -14,9 +14,9 @@ l1 = 6.48; #inches
 l2 = 6.48; #inches
 
 
-#arm1 = kit.servo[0];
-#arm2 = kit.servo[1];
-#pen = kit.servo[2]
+arm1 = kit.servo[0];
+arm2 = kit.servo[1];
+pen = kit.servo[2]
 
 filename = sys.argv[1];
 if len(sys.argv) != 2:
