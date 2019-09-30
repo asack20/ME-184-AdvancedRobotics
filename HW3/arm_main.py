@@ -69,7 +69,7 @@ print('done')
 isWrite = np.full(np.size(x_pos), True)
 
 
-print(len(x_pos))
+print(x_pos.size)
 print('Calculating servo target angles...', end='')
 
 cos_2 = (np.square(x_pos) + np.square(y_pos) - np.square(l1) - np.square(l2))/(2*l1*l2)
