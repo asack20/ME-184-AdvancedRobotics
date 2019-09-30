@@ -122,9 +122,10 @@ for i in range(0, len(x_pos)):
     sin_2 = -m.sqrt(1 - cos_2**2)
     theta_2 = m.degrees(m.atan2(sin_2,cos_2))
 
-    sin_1 = ((l1 + l2*cos_2)*y_pos[i] - (l2*sin_2*x_pos[i])) / (x_pos[i]**2 + y_pos[i]**2)
-    cos_1 = ((l1 + l2*cos_2)*x_pos[i] - (l2*sin_2*y_pos[i])) / (x_pos[i]**2 + y_pos[i]**2)
-    theta_1 = m.degrees(m.atan2(sin_1,cos_1))
+
+    #sin_1 = ((l1 + l2*cos_2)*y_pos[i] - (l2*sin_2*x_pos[i])) / (x_pos[i]**2 + y_pos[i]**2)
+    #cos_1 = ((l1 + l2*cos_2)*x_pos[i] - (l2*sin_2*y_pos[i])) / (x_pos[i]**2 + y_pos[i]**2)
+    theta_1 = m.degrees(m.atan2(y_pos[i],x_pos[i]) - m.atan2(l2*sin_2,l1+l2*cos_2))
         
     
     theta_3 = 90*isWrite[i]
