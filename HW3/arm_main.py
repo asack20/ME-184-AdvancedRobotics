@@ -5,18 +5,19 @@
 from time import sleep    
 import numpy as np
 import sys #for command line arguments
+
 from adafruit_servokit import ServoKit  #uses servo shield api to simplify PWM controll of servos
 kit = ServoKit(channels=16) #specify model being used (16 port version)
-
+arm1 = kit.servo[0];
+arm2 = kit.servo[1];
+pen = kit.servo[2];
 
 #Parameters
 l1 = 6.48; #inches
 l2 = 6.48; #inches
 
 
-arm1 = kit.servo[0];
-arm2 = kit.servo[1];
-pen = kit.servo[2]
+
 
 filename = sys.argv[1];
 if len(sys.argv) != 2:
@@ -120,8 +121,8 @@ for i in range(0, len(x_pos)):
         print('Step: ' + str(i))
         print('\t X Pos: '+ str(x_pos[i]))
         print('\t Y Pos: '+ str(y_pos[i]))
-        print('\t Arm 1: '+ str(theta_1[i]))
-        print('\t Arm 2: '+ str(theta_2[i]))
+        print('\t Arm 1: '+ str(theta_1[i]) + '\t' + str(theta_1[i]-90))
+        print('\t Arm 2: '+ str(theta_2[i]) + '\t' +str(180 - (theta_2[i] + 90) ))
         print('\t Pen: '+ str(isWrite[i]))
 
     if (theta_3[i] != prev_3):
@@ -134,8 +135,8 @@ for i in range(0, len(x_pos)):
     delta_max = max(abs(delta_1), abs(delta_2))
     t_sleep = delta_max / 300
 
-    arm1.angle = theta_1[i] -90
-    arm2.angle = 180 - (theta_2[i] + 90) 
+    arm1.angle = theta_1[i] + 90
+    arm2.angle = 180 + theta_2[i] 
 
     prev_1 = theta_1[i]
     prev_2 = theta_2[i]
