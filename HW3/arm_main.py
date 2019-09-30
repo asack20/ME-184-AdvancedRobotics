@@ -52,39 +52,49 @@ isWrite = np.array(isWrite_temp)
 print('done')
 
 
-# print('Interpolating more coordinates...', end='')
+print('Interpolating more coordinates...', end='')
+n_steps = 50
 
-# print(len(x_in))
-# x_pos = np.array(x_in[0])
-# y_pos = np.array(y_in[0])
-# for i in range(0, len(x_in)-1):
-#     x_interp = np.linspace(x_in[i],x_in[i+1], 50)
-#     y_interp = np.interp(x_interp, [x_in[i], x_in[i+1]],[y_in[i], y_in[i+1]])
-#     x_pos.append(x_pos, x_interp)
-#     y_pos.append(y_pos, y_interp)
+print(len(x_in))
+x_pos = np.array(x_in[0])
+y_pos = np.array(y_in[0])
+for i in range(0, len(x_in)-1):
+    x_interp = np.linspace(x_in[i],x_in[i+1], n_steps)
+    x_interp = np.linspace(y_in[i],y_in[i+1], n_steps)
+    x_pos.append(x_pos, x_interp)
+    y_pos.append(y_pos, y_interp)
 
-# print('done')
+print('done')
 
-# isWrite = np.full(np.size(x_pos), True)
+isWrite = np.full(np.size(x_pos), True)
 
 
-# print(len(x_pos))
+print(len(x_pos))
 print('Calculating servo target angles...', end='')
 
-# calculate motor angles from position all in radians
-cos_alpha = (np.square(l2) - (np.square(l1) + (np.square(x_pos) + np.square(y_pos))))/(-2*l1*np.sqrt(np.square(x_pos) + np.square(y_pos)))
-#print(cos_alpha) 
-alpha_calc = np.arctan2(np.sqrt(1 - np.square(cos_alpha)), cos_alpha)
-beta_calc = np.arctan2(y_pos, x_pos)
+cos_2 = (np.square(x_pos) + np.square(y_pos) - np.square(l1) - np.square(l2))/(2*l1*l2)
+sin_2 = np.sqrt(1-np.square(cos_2))
+theta_2 = np.degrees(np.arctan2(sin_2,cos_2))
 
-theta_1_r = alpha_calc + beta_calc
+sin_1 = ((l1 + l2*cos_2)*y_pos - (l2*sin_2*x_pos)) / (np.square(x_pos) + np.square(y_pos))
+cos_1 = ((l1 + l2*cos_2)*x_pos - (l2*sin_2*y_pos)) / (np.square(x_pos) + np.square(y_pos))
+theta_1 = np.degrees(np.arctan2(sin_1,cos_1))
 
-cos_theta = ((np.square(x_pos) + np.square(y_pos)) - (np.square(l1) + np.square(l2)))/(-2*l1*l2)
-theta_2_r = -np.arctan2(np.sqrt(1 - np.square(cos_theta)),cos_theta)
+# ###
+# # calculate motor angles from position all in radians
+# cos_alpha = (np.square(l2) - (np.square(l1) + (np.square(x_pos) + np.square(y_pos))))/(-2*l1*np.sqrt(np.square(x_pos) + np.square(y_pos)))
+# #print(cos_alpha) 
+# alpha_calc = np.arctan2(np.sqrt(1 - np.square(cos_alpha)), cos_alpha)
+# beta_calc = np.arctan2(y_pos, x_pos)
 
-# target motor position in degrees
-theta_1 = np.degrees(theta_1_r)
-theta_2 = np.degrees(theta_2_r) 
+# theta_1_r = alpha_calc + beta_calc
+
+# cos_theta = ((np.square(x_pos) + np.square(y_pos)) - (np.square(l1) + np.square(l2)))/(-2*l1*l2)
+# theta_2_r = -np.arctan2(np.sqrt(1 - np.square(cos_theta)),cos_theta)
+
+# # target motor position in degrees
+# theta_1 = np.degrees(theta_1_r)
+# theta_2 = np.degrees(theta_2_r) 
 theta_3 = 90*isWrite
 
 print('done')
@@ -120,8 +130,8 @@ for i in range(0, len(theta_1)):
     delta_max = max(abs(delta_1), abs(delta_2))
     t_sleep = delta_max / 300
 
-    arm1.angle = theta_1[i] - 180
-    arm2.angle = theta_2[i] + 180
+    arm1.angle = theta_1[i]
+    arm2.angle = 180 - (theta_2[i] + 90) 
 
     prev_1 = theta_1[i]
     prev_2 = theta_2[i]
