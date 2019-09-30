@@ -78,7 +78,7 @@ print(x_pos.size)
 print('Calculating servo target angles...', end='')
 
 cos_2 = (np.square(x_pos) + np.square(y_pos) - np.square(l1) - np.square(l2))/(2*l1*l2)
-sin_2 = np.sqrt(1-np.square(cos_2))
+sin_2 = -np.sqrt(1-np.square(cos_2))
 theta_2 = np.degrees(np.arctan2(sin_2,cos_2))
 
 sin_1 = ((l1 + l2*cos_2)*y_pos - (l2*sin_2*x_pos)) / (np.square(x_pos) + np.square(y_pos))
