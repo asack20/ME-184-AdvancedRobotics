@@ -119,7 +119,7 @@ print('done')
 print('Running motion...')
 for i in range(0, len(x_pos)):
     cos_2 = (x_pos[i]**2 + y_pos[i]**2 - l1**2 - l2**2)/(2*l1*l2)
-    sin_2 = -m.sqrt(1 - cos_2**2)
+    sin_2 = m.sqrt(1 - cos_2**2)
     theta_2 = m.degrees(m.atan2(sin_2,cos_2))
 
 
