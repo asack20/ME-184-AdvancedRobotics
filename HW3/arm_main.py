@@ -61,8 +61,8 @@ y_pos = np.array(y_in[0])
 for i in range(0, len(x_in)-1):
     x_interp = np.linspace(x_in[i],x_in[i+1], n_steps)
     x_interp = np.linspace(y_in[i],y_in[i+1], n_steps)
-    x_pos.append(x_pos, x_interp)
-    y_pos.append(y_pos, y_interp)
+    np.append(x_pos, x_interp)
+    np.append(y_pos, y_interp)
 
 print('done')
 
