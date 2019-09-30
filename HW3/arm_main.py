@@ -4,6 +4,7 @@
 
 from time import sleep    
 import numpy as np
+import math as m
 import sys #for command line arguments
 
 from adafruit_servokit import ServoKit  #uses servo shield api to simplify PWM controll of servos
@@ -137,18 +138,9 @@ for i in range(0, len(x_pos)):
         print('\t Pen: '+ str(isWrite[i]))
 
     if (theta_3 != prev_3):
-        #pen.angle = theta_3[i]
+        pen.angle = theta_3[i]
         sleep(1)  
 
-    x1 = l1 * m.cos(m.radians(theta_1))
-    y1 = l1 * m.sin(m.radians(theta_1))
-    x2 = x1 + l2 * m.cos(m.radians(theta_1)+m.radians(theta_2))
-    y2 = y1 + l2 * m.sin(m.radians(theta_1)+m.radians(theta_2))
-    
-    x_plt = [0, x1, x2]
-    y_plt = [0, y1, y2]
-    plt.plot(x_plt, y_plt)
-    
     arm1.angle = theta_1[i] -90
     arm2.angle = 180 + (theta_2[i] ) 
 
