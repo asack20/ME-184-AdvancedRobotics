@@ -64,7 +64,7 @@ print(len(isWrite))
 for i in range(0, len(x_in)-1):
     x_interp = np.linspace(x_in[i],x_in[i+1], n_steps)
     y_interp = np.linspace(y_in[i],y_in[i+1], n_steps)
-    write_interp = np.full(x_interp.size, isWrite[i+1])
+    write_interp = np.full(x_interp.size, isWrite[i])
     if i == 0:
         x_pos = x_interp
         y_pos = y_interp
