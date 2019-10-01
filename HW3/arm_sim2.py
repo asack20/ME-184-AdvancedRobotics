@@ -7,11 +7,11 @@ import numpy as np
 import math as m
 import sys #for command line arguments
 
-from adafruit_servokit import ServoKit  #uses servo shield api to simplify PWM controll of servos
-kit = ServoKit(channels=16) #specify model being used (16 port version)
-arm1 = kit.servo[0];
-arm2 = kit.servo[1];
-pen = kit.servo[2];
+# from adafruit_servokit import ServoKit  #uses servo shield api to simplify PWM controll of servos
+# kit = ServoKit(channels=16) #specify model being used (16 port version)
+# arm1 = kit.servo[0];
+# arm2 = kit.servo[1];
+# pen = kit.servo[2];
 
 #Parameters
 l1 = 6.48; #inches
@@ -112,9 +112,9 @@ print('Initializing arm postion...', end='')
 prev_1 = 90
 prev_2 = 0
 prev_3 = 0
-arm1.angle = prev_1
-arm2.angle = prev_2
-pen.angle = prev_3
+#arm1.angle = prev_1
+#arm2.angle = prev_2
+#pen.angle = prev_3
 sleep(3)
 print('done')
 
@@ -134,21 +134,21 @@ for i in range(0, len(x_pos)):
         print('Step: ' + str(i))
         print('\t X Pos: '+ str(x_pos[i]))
         print('\t Y Pos: '+ str(y_pos[i]))
-        print('\t Arm 1: '+ str(theta_1) + '\t' + str(theta_1%180))
-        print('\t Arm 2: '+ str(theta_2) + '\t' +str(theta_2%180))
+        print('\t Arm 1: '+ str(theta_1) + '\t' + str(theta_1+90))
+        print('\t Arm 2: '+ str(theta_2) + '\t' +str(180 + (theta_2) ))
         print('\t Pen: '+ str(isWrite[i]))
 
-    if (theta_3 != prev_3):
-        pen.angle = theta_3
-        sleep(1)  
+#    if (theta_3 != prev_3):
+#        pen.angle = theta_3
+#        sleep(1)  
 
-    arm1.angle = theta_1 % 180
-    arm2.angle = theta_2 % 180
+    # arm1.angle = theta_1 % 180
+    # arm2.angle = theta_2 % 180
 
-    prev_1 = theta_1
-    prev_2 = theta_2
-    prev_3 = theta_3
+#    prev_1 = theta_1
+#    prev_2 = theta_2
+#    prev_3 = theta_3
     
-    sleep(0.1)
+    sleep(0.3)
 
 print('done')
