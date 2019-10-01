@@ -143,7 +143,7 @@ for i in range(0, len(x_pos)):
         sleep(1)  
 
     arm1.angle = theta_1 % 180
-    arm2.angle = (theta_2 * -1)  % 180
+    arm2.angle = (theta_2)  % 180
 
     prev_1 = theta_1
     prev_2 = theta_2
