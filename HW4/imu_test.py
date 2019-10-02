@@ -1,4 +1,4 @@
-import utime
+import time
 from machine import I2C, Pin
 from mpu9250 import MPU9250
 
@@ -12,4 +12,4 @@ while True:
     print(sensor.gyro)
     print(sensor.magnetic)
 
-    utime.sleep_ms(1000)
+    time.sleep(1000)
