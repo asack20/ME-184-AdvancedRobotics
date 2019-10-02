@@ -120,6 +120,6 @@ for i in range(0, len(x_pos)):
     prev_2 = theta_2
     prev_3 = theta_3
     
-    #sleep(0.1) # sleep 0.1 sec between moves
+    sleep(0.1) # sleep 0.1 sec between moves
 
 print('done')
