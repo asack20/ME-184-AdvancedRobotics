@@ -1,15 +1,12 @@
 import time
-from machine import I2C, Pin
+#from machine import I2C, Pin
 from mpu9250 import MPU9250
 
-i2c = I2C(scl=Pin(22), sda=Pin(21))
-sensor = MPU9250(i2c)
-
-print("MPU9250 id: " + hex(sensor.whoami))
-
+imu = MPU9250('X')
 while True:
-    print(sensor.acceleration)
-    print(sensor.gyro)
-    print(sensor.magnetic)
-
-    time.sleep(1000)
+    print(imu.accel.xyz)
+    print(imu.gyro.xyz)
+    print(imu.mag.xyz)
+    print(imu.temperature)
+    print(imu.accel.z)
+    time.sleep(1)
