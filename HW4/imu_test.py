@@ -1,40 +1,45 @@
-# coding: utf-8
-## @package faboMPU9250
-#  This is a library for the FaBo 9AXIS I2C Brick.
-#
-#  http://fabo.io/202.html
-#
-#  Released under APACHE LICENSE, VERSION 2.0
-#
-#  http://www.apache.org/licenses/
-#
-#  FaBo <info@fabo.io>
+  
+import sys, getopt
 
-from FaBo9Axis_MPU9250 import *
+sys.path.append('.')
+import RTIMU
+import os.path
 import time
-import sys
+import math
 
-mpu9250 = FaBo9Axis_MPU9250.MPU9250()
+SETTINGS_FILE = "RTIMULib"
 
-try:
-    while True:
-        accel = mpu9250.readAccel()
-        print(" ax = " , ( accel['x'] ))
-        print(" ay = " , ( accel['y'] ))
-        print(" az = " , ( accel['z'] ))
+print("Using settings file " + SETTINGS_FILE + ".ini")
+if not os.path.exists(SETTINGS_FILE + ".ini"):
+  print("Settings file does not exist, will be created")
 
-        gyro = mpu9250.readGyro()
-        print(" gx = " , ( gyro['x'] ))
-        print(" gy = " , ( gyro['y'] ))
-        print(" gz = " , ( gyro['z'] ))
+s = RTIMU.Settings(SETTINGS_FILE)
+imu = RTIMU.RTIMU(s)
 
-        mag = mpu9250.readMagnet()
-        print(" mx = " , ( mag['x'] ))
-        print(" my = " , ( mag['y'] ))
-        print(" mz = " , ( mag['z'] ))
-        print()
+print("IMU Name: " + imu.IMUName())
 
-        time.sleep(0.5)
+if (not imu.IMUInit()):
+    print("IMU Init Failed")
+    sys.exit(1)
+else:
+    print("IMU Init Succeeded")
 
-except KeyboardInterrupt:
-    sys.exit()
+# this is a good time to set any fusion parameters
+
+imu.setSlerpPower(0.02)
+imu.setGyroEnable(True)
+imu.setAccelEnable(True)
+imu.setCompassEnable(True)
+
+poll_interval = imu.IMUGetPollInterval()
+print("Recommended Poll Interval: %dmS\n" % poll_interval)
+
+while True:
+  if imu.IMURead():
+    # x, y, z = imu.getFusionData()
+    # print("%f %f %f" % (x,y,z))
+    data = imu.getIMUData()
+    fusionPose = data["fusionPose"]
+    print("r: %f p: %f y: %f" % (math.degrees(fusionPose[0]), 
+        math.degrees(fusionPose[1]), math.degrees(fusionPose[2])))
+    time.sleep(poll_interval*1.0/1000.0)
