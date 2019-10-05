@@ -39,7 +39,8 @@ while True:
     # x, y, z = imu.getFusionData()
     # print("%f %f %f" % (x,y,z))
     data = imu.getIMUData()
-    fusionPose = data["fusionPose"]
-    print("r: %f p: %f y: %f" % (math.degrees(fusionPose[0]), 
-        math.degrees(fusionPose[1]), math.degrees(fusionPose[2])))
+    print(data)
+    #fusionPose = data["fusionPose"]
+    #print("r: %f p: %f y: %f" % (math.degrees(fusionPose[0]), 
+        #math.degrees(fusionPose[1]), math.degrees(fusionPose[2])))
     time.sleep(poll_interval*1.0/1000.0)
