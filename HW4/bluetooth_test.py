@@ -16,10 +16,10 @@ def receiveMessages():
   server_sock.listen(1)
   
   client_sock,address = server_sock.accept()
-  print "Accepted connection from " + str(address)
+  print("Accepted connection from " + str(address))
   
   data = client_sock.recv(1024)
-  print "received [%s]" % data
+  print("received [%s]" % data)
   
   client_sock.close()
   server_sock.close()
@@ -34,7 +34,7 @@ def sendMessageTo(targetBluetoothMacAddress):
 def lookUpNearbyBluetoothDevices():
   nearby_devices = bluetooth.discover_devices()
   for bdaddr in nearby_devices:
-    print str(bluetooth.lookup_name( bdaddr )) + " [" + str(bdaddr) + "]"
+    print(str(bluetooth.lookup_name( bdaddr )) + " [" + str(bdaddr) + "]")
     
     
 lookUpNearbyBluetoothDevices()
