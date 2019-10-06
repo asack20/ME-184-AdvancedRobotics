@@ -35,9 +35,12 @@ def lookUpNearbyBluetoothDevices():
   nearby_devices = bluetooth.discover_devices()
   for bdaddr in nearby_devices:
     print(str(bluetooth.lookup_name( bdaddr )) + " [" + str(bdaddr) + "]")
+  return nearby_devices[0]
     
 
 print("Running Bluetooth Test")    
-lookUpNearbyBluetoothDevices()
+addr = lookUpNearbyBluetoothDevices()
+sendMessageTo(addr)
+receiveMessages()
 print("Done")
 
