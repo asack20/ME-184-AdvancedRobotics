@@ -15,7 +15,8 @@ def main(args):
 
 	while True:
 	    print("Test")
-	    sendMessageTo(mac, message)
+	    try:
+	    	sendMessageTo(mac, message)
 	    time.sleep(2)
 	return 0
 
