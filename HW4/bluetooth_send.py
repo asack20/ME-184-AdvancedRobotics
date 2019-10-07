@@ -17,6 +17,8 @@ def main(args):
 	    print("Test")
 	    try:
 	    	sendMessageTo(mac, message)
+	    except:
+	    	print("No Send")
 	    time.sleep(2)
 	return 0
 
