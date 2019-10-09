@@ -22,7 +22,7 @@ def main(args):
 	message = "testing testing"
 	isConnected = False
 
-	while !isConnected:
+	while not isConnected:
 	    print("Attempting connection to: " + str(mac))
 	    try:
 	    	sock = sendMessageTo(mac, message)
