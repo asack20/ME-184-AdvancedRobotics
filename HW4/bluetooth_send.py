@@ -32,7 +32,7 @@ def main(args):
 
 	for i in range(0, 10):
 		print("Sending: " + str(i))
-		sendMessageTo(sock, i)
+		sendMessageTo(sock, str(i))
 		time.sleep(0.1)
 	
 	sock.send(str(999))

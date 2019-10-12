@@ -11,19 +11,19 @@ def receiveMessages():
   print("Accepted connection from " + str(address))
   
   data = "0"
-  while data != "b'999'":
-    data = client_sock.recv(1024)
-    print("received [%s]" % data)
+  while data != "999":
+    raw_data = client_sock.recv(1024)
+    data = raw_data[2:-2]
+    print("received [%s]" % raw_data)
+    print(data)
+
   
   client_sock.close()
   server_sock.close()
 
 
 def main(args):
-  mac = ""
-  message = ""
-
-  print("Test")
+  print("Running Bluetooth recieve code")
   receiveMessages()
       #time.sleep(2)
   return 0
