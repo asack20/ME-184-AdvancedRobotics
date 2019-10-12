@@ -13,9 +13,8 @@ def receiveMessages():
   data = "0"
   while data != "999":
     raw_data = client_sock.recv(1024)
-    data = raw_data[2:len(raw_data)]
+    data = raw_data.decode("utf-8") 
     print("received [%s]" % raw_data)
-    print(raw_data)
     print(data)
 
   
