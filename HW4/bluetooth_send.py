@@ -25,7 +25,7 @@ def main(args):
 	while not isConnected:
 	    print("Attempting connection to: " + str(mac))
 	    try:
-	    	sock = sendMessageTo(mac, message)
+	    	sock = connectTo(mac)
 	    	isConnected = True
 	    except:
 	    	print("Could not connect. Will try again in 2 seconds")
