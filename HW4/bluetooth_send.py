@@ -24,9 +24,9 @@ def main(args):
 	    print("Attempting connection to: " + str(mac))
 	    try:
 	    	port = 1
-			sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
-			sock.connect((mac, port))
-			sock.send("Connected from: " + mac)
+	    	sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
+	    	sock.connect((mac, port))
+	    	sock.send("Connected from: " + mac)
 	    	isConnected = True
 	    except:
 	    	print("Could not connect. Will try again in 2 seconds")
