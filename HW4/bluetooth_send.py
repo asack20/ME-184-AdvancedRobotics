@@ -12,7 +12,7 @@ def connectTo(targetBluetoothMacAddress):
 
 
 def sendMessageTo(sock, message):
-  sock.send("Connected from: " + mac)
+  sock.send(message)
 
 
 
