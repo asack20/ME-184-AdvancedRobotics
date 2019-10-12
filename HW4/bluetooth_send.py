@@ -1,21 +1,19 @@
 import bluetooth
 import time
 
-def connectTo(targetBluetoothMacAddress):
-  port = 1
-  sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
-  sock.connect((targetBluetoothMacAddress, port))
-  sock.send("Connected from: " + targetBluetoothMacAddress)
+# def connectTo(targetBluetoothMacAddress):
+#   port = 1
+#   sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
+#   sock.connect((targetBluetoothMacAddress, port))
+#   sock.send("Connected from: " + targetBluetoothMacAddress)
   
-  return sock
+#   return sock
 
 
 
-def sendMessageTo(sock, message):
-  sock.send(message)
-  return sock
-
-
+# def sendMessageTo(sock, message):
+#   sock.send(message)
+#   return sock
 
 def main(args):
 	mac = "B8:27:EB:64:6F:44"
@@ -25,10 +23,10 @@ def main(args):
 	while not isConnected:
 	    print("Attempting connection to: " + str(mac))
 	    try:
-	    	port = 1
-  			sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
-  			sock.connect((targetBluetoothMacAddress, port))
-  			sock.send("Connected from: " + targetBluetoothMacAddress)
+			port = 1
+			sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
+			sock.connect((mac, port))
+			sock.send("Connected from: " + mac)
 	    	isConnected = True
 	    except:
 	    	print("Could not connect. Will try again in 2 seconds")
