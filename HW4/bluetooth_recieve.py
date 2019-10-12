@@ -11,7 +11,7 @@ def receiveMessages():
   print("Accepted connection from " + str(address))
   
   data = "0"
-  while data not "b'999'":
+  while data != "b'999'":
     data = client_sock.recv(1024)
     print("received [%s]" % data)
   
