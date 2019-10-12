@@ -31,7 +31,7 @@ def main(args):
 	    	print("Could not connect. Will try again in 2 seconds")
 	    	isConnected = False
 	    	time.sleep(2)
-	print("Connected to: " + str(mac) + "\n")
+	print("Connected to: " + mac + "\n")
 
 	for i in range(0, 10):
 		sendMessageTo(sock, str(i))
