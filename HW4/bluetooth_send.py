@@ -36,8 +36,8 @@ def main(args):
 
 	for i in range(0, 10):
 		print("Sending: " + str(i))
-		sock.send(message)
-		time.sleep(1)
+		sock.send(str(i))
+		time.sleep(5)
 	sock.close()
 
 	return 0
