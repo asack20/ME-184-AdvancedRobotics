@@ -26,7 +26,7 @@ def main(args):
 	    print("Attempting connection to: " + str(mac))
 	    try:
 	    	port = 1
-  			sock=bluetooth.BluetoothSocket(bluetooth.RFCOMM)
+  			sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
   			sock.connect((targetBluetoothMacAddress, port))
   			sock.send("Connected from: " + targetBluetoothMacAddress)
 	    	isConnected = True
