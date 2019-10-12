@@ -36,7 +36,7 @@ def main(args):
 	for i in range(0, 10):
 		print("Sending: " + str(i))
 		sendMessageTo(sock, str(i))
-		time.sleep(0.1)
+		time.sleep(1)
 	sock.close()
 
 	return 0
