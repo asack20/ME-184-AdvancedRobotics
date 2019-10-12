@@ -34,6 +34,7 @@ def main(args):
 	print("Connected to: " + mac + "\n")
 
 	for i in range(0, 10):
+		print("Sending: " + str(i))
 		sendMessageTo(sock, str(i))
 
 	sock.close()
