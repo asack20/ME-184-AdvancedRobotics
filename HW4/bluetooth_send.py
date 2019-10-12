@@ -25,7 +25,10 @@ def main(args):
 	while not isConnected:
 	    print("Attempting connection to: " + str(mac))
 	    try:
-	    	sock = connectTo(mac)
+	    	port = 1
+  			sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
+  			sock.connect((targetBluetoothMacAddress, port))
+  			sock.send("Connected from: " + targetBluetoothMacAddress)
 	    	isConnected = True
 	    except:
 	    	print("Could not connect. Will try again in 2 seconds")
@@ -35,7 +38,7 @@ def main(args):
 
 	for i in range(0, 10):
 		print("Sending: " + str(i))
-		sock = sendMessageTo(sock, str(i))
+		sock.send(message)
 		time.sleep(1)
 	sock.close()
 
