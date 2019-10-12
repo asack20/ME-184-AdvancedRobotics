@@ -15,6 +15,7 @@ def receiveMessages():
     raw_data = client_sock.recv(1024)
     data = raw_data[2:len(raw_data)]
     print("received [%s]" % raw_data)
+    print(raw_data)
     print(data)
 
   
