@@ -23,9 +23,8 @@ def main(args):
   mac = ""
   message = ""
 
-  while True:
-      print("Test")
-      receiveMessages()
+  print("Test")
+  receiveMessages()
       #time.sleep(2)
   return 0
 
