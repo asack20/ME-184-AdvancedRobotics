@@ -13,7 +13,7 @@ def connectTo(targetBluetoothMacAddress):
 
 def sendMessageTo(sock, message):
   sock.send(message)
-
+  return sock
 
 
 
@@ -35,7 +35,7 @@ def main(args):
 
 	for i in range(0, 10):
 		print("Sending: " + str(i))
-		sendMessageTo(sock, str(i))
+		sock = sendMessageTo(sock, str(i))
 		time.sleep(1)
 	sock.close()
 
