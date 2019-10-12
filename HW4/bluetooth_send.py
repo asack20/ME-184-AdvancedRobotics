@@ -23,7 +23,7 @@ def main(args):
 	while not isConnected:
 	    print("Attempting connection to: " + str(mac))
 	    try:
-			port = 1
+	    	port = 1
 			sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
 			sock.connect((mac, port))
 			sock.send("Connected from: " + mac)
