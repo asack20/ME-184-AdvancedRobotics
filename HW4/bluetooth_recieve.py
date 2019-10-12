@@ -10,8 +10,10 @@ def receiveMessages():
   client_sock,address = server_sock.accept()
   print("Accepted connection from " + str(address))
   
-  data = client_sock.recv(1024)
-  print("received [%s]" % data)
+  data = "0"
+  while data not "b'999'":
+    data = client_sock.recv(1024)
+    print("received [%s]" % data)
   
   client_sock.close()
   server_sock.close()
