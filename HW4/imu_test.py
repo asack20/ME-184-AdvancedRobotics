@@ -46,6 +46,8 @@ while True:
     compass = data["compass"]
     print("time: " + str(timestamp))
     print("x: %f y: %f z: %f" % (compass[0],compass[1],compass[2]))
+    angle = math.atan2(compass[1], compass[0])
+    print("angle: %f" % angle )
     print("\n")
 
     #print("r: %f p: %f y: %f" % (math.degrees(fusionPose[0]), 
