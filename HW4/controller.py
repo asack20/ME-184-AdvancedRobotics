@@ -22,6 +22,7 @@ def sendMessageTo(sock, message):
   return
 
 def main(args):
+	print("Running IMU Controller code")
 	SETTINGS_FILE = "RTIMULib"
 
 	print("Using settings file " + SETTINGS_FILE + ".ini")
@@ -66,12 +67,12 @@ def main(args):
 
 	while True:
 		if imu.IMURead():
-	    data = imu.getIMUData()
-	    timestamp = data["timestamp"]
-	    compass = data["compass"]
-	    print("time: " + str(timestamp))
-	    print("x: %f y: %f z: %f" % (compass[0],compass[1],compass[2]))
-	    print("\n")
+	    	data = imu.getIMUData()
+	    	timestamp = data["timestamp"]
+	    	compass = data["compass"]
+	    	print("time: " + str(timestamp))
+	    	print("x: %f y: %f z: %f" % (compass[0],compass[1],compass[2]))
+	    	print("\n")
 
 	    sock.send(str(compass))
 
