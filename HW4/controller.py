@@ -1,6 +1,7 @@
 import bluetooth
 import time
 import getopt
+import sys
 sys.path.append('.')
 import RTIMU
 import os.path
