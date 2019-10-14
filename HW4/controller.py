@@ -74,7 +74,7 @@ def main(args):
 		message = "0"
 		button_pressed = not GPIO.input(23)
 		if button_pressed:
-        	print('Button Pressed...')
+			print('Button Pressed...')
 			data = imu.getIMUData()
 			timestamp = data["timestamp"]
 			compass = data["compass"]
