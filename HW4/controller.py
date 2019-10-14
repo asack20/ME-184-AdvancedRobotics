@@ -76,8 +76,8 @@ def main(args):
 			print("x: %f y: %f z: %f" % (compass[0],compass[1],compass[2]))
 			print("\n")
 
-		sock.send(str(compass))
-		time.sleep(poll_interval*1.0/1000.0)
+			sock.send(str(compass))
+			time.sleep(poll_interval*1.0/1000.0)
 	
 	sock.send(str(999))
 	sock.close()
