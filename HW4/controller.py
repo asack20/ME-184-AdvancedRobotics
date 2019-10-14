@@ -6,6 +6,9 @@ sys.path.append('.')
 import RTIMU
 import os.path
 import math
+import RPi.GPIO as GPIO
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)#Button to GPIO23
 
 
 def connectTo(targetBluetoothMacAddress):
@@ -68,20 +71,24 @@ def main(args):
 	print("Connected to: " + mac + "\n")
 
 	while True:
-		if imu.IMURead():
+		message = "0"
+		button_pressed = not GPIO.input(23)
+        if button_pressed:
+            print('Button Pressed...')
 			data = imu.getIMUData()
 			timestamp = data["timestamp"]
 			compass = data["compass"]
 			print("time: " + str(timestamp))
 			print("x: %f y: %f z: %f" % (compass[0],compass[1],compass[2]))
 			print("\n")
+			message = str(compass)
 
-			sock.send(str(compass))
-			time.sleep(poll_interval*1.0/1000.0)
+		sock.send(message)
+		time.sleep(poll_interval*1.0/1000.0)
 	
 	sock.send(str(999))
 	sock.close()
-
+	GPIO.cleanup()
 	return 0
 
 if __name__ == '__main__':
