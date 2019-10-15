@@ -7,6 +7,9 @@ import os.path
 import time
 import math
 import statistics
+import RPi.GPIO as GPIO
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)#Button to GPIO23
 
 SETTINGS_FILE = "RTIMULib"
 
@@ -58,6 +61,10 @@ for i in range(0, 10):
 
 while True:
   if imu.IMURead():
+
+    button_pressed = not GPIO.input(23)
+    if button_pressed:
+        print("Button Pressed")
     # x, y, z = imu.getFusionData()
     # print("%f %f %f" % (x,y,z))
     data = imu.getIMUData()
