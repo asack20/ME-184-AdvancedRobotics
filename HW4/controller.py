@@ -55,14 +55,16 @@ def main(args):
 	print("Recommended Poll Interval: %dmS\n" % poll_interval)
 
 	# Callibrate Zero
+	print("Zeroing IMU")
 	imu.IMURead()
 	angleSum = 0
 	for i in range(0, 50):
 		data = imu.getIMUData()
-		compass = data["compass"]
-		angleSum += math.atan2(compass[1], compass[0])
+		fusionPose = data["fusionPose"]
+    	angleSum  += fusionPose[2] 
 
 	zeroAngle = angleSum/50
+	print("Done Zeroing IMU")
 
 	mac = "B8:27:EB:80:EB:FD"
 	isConnected = False
@@ -85,9 +87,11 @@ def main(args):
 		if button_pressed and imu.IMURead():
 			print('Button Pressed...')
 			data = imu.getIMUData()
-			compass = data["compass"]
-			print("x: %f y: %f z: %f" % (compass[0],compass[1],compass[2]))
-			angle = math.atan2(compass[1], compass[0]) - zeroAngle
+			fusionPose = data["fusionPose"]
+			print("Yaw Raw: %f" % fusionPose[2])
+			print("Yaw Zeroed: %f" % angle)
+			angle = fusionPose[2] - zeroAngle
+			print("Yaw Zeroed: %f" % angle)
 			if abs(angle) <= 1:
 				message = "1"
 			elif angle > 1:
