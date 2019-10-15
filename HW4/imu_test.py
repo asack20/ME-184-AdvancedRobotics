@@ -6,6 +6,7 @@ import RTIMU
 import os.path
 import time
 import math
+import statistics
 
 SETTINGS_FILE = "RTIMULib"
 
@@ -34,6 +35,27 @@ imu.setCompassEnable(True)
 poll_interval = imu.IMUGetPollInterval()
 print("Recommended Poll Interval: %dmS\n" % poll_interval)
 
+print("Zeroing IMU")
+imu.IMURead()
+angleSum = 0
+for i in range(0, 50):
+    print(i)
+    
+    data = imu.getIMUData()
+    fusionPose = data["fusionPose"]
+    angleSum  += fusionPose[2] 
+    print(fusionPose[2])
+    #angleSum += math.atan2(compass[1], compass[0])
+
+zeroAngle = angleSum/50
+
+yawList = []
+for i in range(0, 10):
+    data = imu.getIMUData()
+    fusionPose = data["fusionPose"]
+    yawList.append(fusionPose[2])
+
+
 while True:
   if imu.IMURead():
     # x, y, z = imu.getFusionData()
@@ -41,13 +63,17 @@ while True:
     data = imu.getIMUData()
     #print(data)
     #print("\n\n")
-    #fusionPose = data["fusionPose"]
+    fusionPose = data["fusionPose"]
     timestamp = data["timestamp"]
-    compass = data["compass"]
     print("time: " + str(timestamp))
-    print("x: %f y: %f z: %f" % (compass[0],compass[1],compass[2]))
-    angle = math.atan2(compass[1], compass[0])
-    print("angle: %f" % angle )
+    print("yaw Raw: %f" % fusionPose[2])
+
+    yawList.pop(0)
+    yawList.append(fusionPose[2])
+
+    yawAvg = statistics.mean(yawList)
+    print("Avg Yaw: " + str(yawAvg))
+
     print("\n")
 
     #print("r: %f p: %f y: %f" % (math.degrees(fusionPose[0]), 

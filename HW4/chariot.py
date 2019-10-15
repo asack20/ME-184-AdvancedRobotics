@@ -4,8 +4,9 @@ import time
 
 # Define Servos globally
 kit = ServoKit(channels=16) #specify model being used (16 port version)
-drive = kit.continuous_servo[0];
-turn = kit.servo[1];
+driveL = kit.continuous_servo[0];
+driveR = kit.continuous_servo[1];
+turn = kit.servo[2];
 
 def receiveCommands():
   server_sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
@@ -30,19 +31,23 @@ def receiveCommands():
 
       elif val == 0:
         print("Stopping Chariot")
-        drive.throttle = 0
+        driveL.throttle = 0
+        driveR.throttle = 0
 
       elif val == 1:
         print("Driving Straight")
-        drive.throttle = 1
+        driveL.throttle = 1
+        driveR.throttle = 1
         turn.angle = 90
       elif val == 2:
         print("Driving Left")
-        drive.throttle = 1
+        driveL.throttle = 1
+        driveR.throttle = 1
         turn.angle = 60
       elif val == 3:
         print("Driving Right")
-        drive.throttle = 1
+        driveL.throttle = 1
+        driveR.throttle = 1
         turn.angle = 120
       else:
         print("Revieved Unknown Integer Command")
