@@ -61,10 +61,11 @@ def main(args):
 	for i in range(0, 50):
 		data = imu.getIMUData()
 		fusionPose = data["fusionPose"]
-		angleSum  += fusionPose[2] 
+		angleSum = angleSum + fusionPose[2] 
 
 	zeroAngle = angleSum/50
 	print("Done Zeroing IMU")
+	print("Zero Angle: " + str(zeroAngle))
 
 	mac = "B8:27:EB:80:EB:FD"
 	isConnected = False
@@ -94,9 +95,9 @@ def main(args):
 			if abs(angle) <= 1:
 				message = "1"
 			elif angle > 1:
-				message = "2"
+				message = "3" # Right
 			elif angle < -1:
-				message = "3"
+				message = "2" # Left
 			
 
 		sock.send(message)
