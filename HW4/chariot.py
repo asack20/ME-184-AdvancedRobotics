@@ -65,13 +65,15 @@ def receiveCommands():
 
 def main(args):
   print("Running Chariot code")
-  drive.throttle = 0 # zero servos
+  driveL.throttle = 0 # zero servos
+  driveR.throttle = 0 # zero servos
   turn.angle = 90
 
   receiveCommands() # listen to commands from controller
 
   turn.angle = 90 # zero servos 
-  drive.throttle = 0
+  driveL.throttle = 0 # zero servos
+  driveR.throttle = 0
   time.sleep(1) # so servos have time to move
   print("Program Done") 
   return 0
