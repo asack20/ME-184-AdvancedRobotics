@@ -54,7 +54,7 @@ def main(args):
 	poll_interval = imu.IMUGetPollInterval()
 	print("Recommended Poll Interval: %dmS\n" % poll_interval)
 
-	% Callibrate Zero
+	# Callibrate Zero
 	imu.IMURead()
 	angleSum = 0
 	for i in range(0, 50):
