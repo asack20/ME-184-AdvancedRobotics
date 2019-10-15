@@ -78,8 +78,14 @@ def main(args):
 			data = imu.getIMUData()
 			compass = data["compass"]
 			print("x: %f y: %f z: %f" % (compass[0],compass[1],compass[2]))
-			print("\n")
-			message = str(compass)
+			angle = math.atan2(compass[1], compass[0])
+			if abs(angle) <= 1:
+				message = "1"
+			elif angle > 1:
+				message = "2"
+			elif angle < -1:
+				message = "3"
+			
 
 		sock.send(message)
 		time.sleep(poll_interval*1.0/1000.0)
