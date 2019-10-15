@@ -37,17 +37,17 @@ def receiveCommands():
       elif val == 1:
         print("Driving Straight")
         driveL.throttle = 1
-        driveR.throttle = 1
+        driveR.throttle = -1
         turn.angle = 90
       elif val == 2:
         print("Driving Left")
         driveL.throttle = 1
-        driveR.throttle = 1
+        driveR.throttle = -1
         turn.angle = 60
       elif val == 3:
         print("Driving Right")
         driveL.throttle = 1
-        driveR.throttle = 1
+        driveR.throttle = -1
         turn.angle = 120
       else:
         print("Revieved Unknown Integer Command")
