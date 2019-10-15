@@ -63,8 +63,7 @@ while True:
   if imu.IMURead():
 
     button_pressed = not GPIO.input(24)
-    if button_pressed:
-        print("Button Pressed")
+    print("Button Pressed: " + str(button_pressed))
     # x, y, z = imu.getFusionData()
     # print("%f %f %f" % (x,y,z))
     data = imu.getIMUData()
