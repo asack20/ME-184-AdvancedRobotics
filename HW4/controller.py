@@ -89,7 +89,6 @@ def main(args):
 			data = imu.getIMUData()
 			fusionPose = data["fusionPose"]
 			print("Yaw Raw: %f" % fusionPose[2])
-			print("Yaw Zeroed: %f" % angle)
 			angle = fusionPose[2] - zeroAngle
 			print("Yaw Zeroed: %f" % angle)
 			if abs(angle) <= 1:
