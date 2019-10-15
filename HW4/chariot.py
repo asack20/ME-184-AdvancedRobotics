@@ -54,14 +54,8 @@ def receiveCommands():
 
     else:
       print("Recieved Non-Integer Command")
-
-    
-
-
-  
   client_sock.close()
   server_sock.close()
-
 
 def main(args):
   print("Running Chariot code")
