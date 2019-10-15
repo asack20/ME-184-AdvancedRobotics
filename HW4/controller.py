@@ -54,6 +54,15 @@ def main(args):
 	poll_interval = imu.IMUGetPollInterval()
 	print("Recommended Poll Interval: %dmS\n" % poll_interval)
 
+	% Callibrate Zero
+	imu.IMURead()
+	angleSum = 0
+	for i in range(0, 50):
+		data = imu.getIMUData()
+		compass = data["compass"]
+		angleSum += math.atan2(compass[1], compass[0])
+
+	zeroAngle = angleSum/50
 
 	mac = "B8:27:EB:80:EB:FD"
 	isConnected = False
@@ -78,7 +87,7 @@ def main(args):
 			data = imu.getIMUData()
 			compass = data["compass"]
 			print("x: %f y: %f z: %f" % (compass[0],compass[1],compass[2]))
-			angle = math.atan2(compass[1], compass[0])
+			angle = math.atan2(compass[1], compass[0]) - zeroAngle
 			if abs(angle) <= 1:
 				message = "1"
 			elif angle > 1:
