@@ -61,7 +61,7 @@ def main(args):
 	for i in range(0, 50):
 		data = imu.getIMUData()
 		fusionPose = data["fusionPose"]
-    	angleSum  += fusionPose[2] 
+		angleSum  += fusionPose[2] 
 
 	zeroAngle = angleSum/50
 	print("Done Zeroing IMU")
