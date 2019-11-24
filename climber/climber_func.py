@@ -5,9 +5,10 @@ from adafruit_servokit import ServoKit
 import time
 
 import RPi.GPIO as GPIO
-from picamera import PiCamera
+import picamera
 import numpy as np
 import matplotlib.pyplot as plt
+import imageio
 
 
 LEDPIN = 21
@@ -38,16 +39,16 @@ def plot_frame(arr):
     plt.show()
 
 
-
 for i in range(0,3):
 	led_on()
 	time.sleep(3)
 	led_off()
 	time.sleep(3)
 
-for i in range(0,3):
-	out = capture_frame()
-	plot_frame(out)
-	time.sleep(2)
+# for i in range(0,3):
+# 	out = capture_frame()
+# 	plot_frame(out)
+# 	time.sleep(2)
 
+plt.show()
 GPIO.cleanup()
