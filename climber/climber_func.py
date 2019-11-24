@@ -2,14 +2,8 @@ import time
 import board, digitalio, busio
 from adafruit_servokit import ServoKit
 
-import sys, getopt
-
-sys.path.append('.')
-import RTIMU
-import os.path
 import time
-import math
-import statistics
+
 import RPi.GPIO as GPIO
 from picamera import PiCamera
 import numpy as np
@@ -34,14 +28,14 @@ def led_off():
 
 def capture_frame():
 	with picamera.PiCamera() as camera:
-    	output = np.empty((720, 1280, 3), dtype=np.uint8)
-    	camera.capture(output, 'rgb')
-   	return output
+		output = np.empty((720, 1280, 3), dtype=np.uint8)
+		camera.capture(output, 'rgb')
+	return output
 
 def plot_frame(arr):
-	plt.figure()
-	plt.imshow(arr):
-	plt.show()
+    plt.figure()
+    plt.imshow(arr)
+    plt.show()
 
 
 
