@@ -4,57 +4,93 @@ Created on Thu Nov 14 19:20:40 2019
 
 @author: Andrew
 """
+from IPython import get_ipython
+def __reset__(): get_ipython().magic('reset -sf')
 
 from scipy import signal
 from scipy import misc
 import numpy as np
 import matplotlib.pyplot as plt
+import imageio
 
-#sig = np.random.randn(1000)
-#autocorr = signal.fftconvolve(sig, sig[::-1], mode='full')
-#
-#fig, (ax_orig, ax_mag) = plt.subplots(2, 1)
-#ax_orig.plot(sig)
-#ax_orig.set_title('White noise')
-#ax_mag.plot(np.arange(-len(sig)+1,len(sig)), autocorr)
-#ax_mag.set_title('Autocorrelation')
-#fig.tight_layout()
-#fig.show()
-#
-#face = misc.face()
-#misc.imsave('face.png', face) # First we need to create the PNG file
-#
-#face = misc.imread('face.png')
+plt.close('all')
 
 
-face = misc.face(gray=True)
+imRaw = np.mean(imageio.imread('pics/zebra1.jfif'), axis=2)
+im = np.zeros((1024,1024))
+im[0:705, 0:1000] = imRaw
+#patch = misc.imread('pics/zebra1.jfif',flatten=True)
 
-face = misc.imread('pics/zebra1.jfif',flatten=True)
-#kernel = np.outer(signal.gaussian(70, 8), signal.gaussian(70, 8))
-kernel = np.array([[-1,-1,-1],[-1,8,-1],[-1,-1,-1]])
+edge = np.zeros((1024,1024))
+edge[0:3,0:3] = [[-1,-1,-1],[-1,8,-1],[-1,-1,-1]]
 
-blurred = signal.fftconvolve(face, kernel, mode='same')
+patch = im[300:400, 450:550]
 
-patch = face[300:400, 450:550]
+plt.figure()
 plt.imshow(patch)
+
+patch = np.rot90(patch)
+
+#plt.figure()
+#plt.imshow(patch)
+
+patch = np.rot90(patch)
+
+#plt.figure()
+#plt.imshow(patch)
+
+
+target = np.zeros(im.shape)
+target[0:100, 0:100] = patch
+
+#plt.figure()
+#plt.imshow(target)
+
+im_F = np.fft.fft2(im)
+target_F = np.fft.fft2(target)
+edge_F = np.fft.fft2(edge)
+
 plt.figure()
-patchBlur = signal.fftconvolve(patch, kernel, mode='same')
+plt.imshow(im)
 
-plt.imshow(patchBlur)
+#plt.figure()
+#plt.imshow(target)
 
-fig, (ax_orig, ax_kernel, ax_blurred) = plt.subplots(3, 1,figsize=(6, 15))
-ax_orig.imshow(face, cmap='gray')
-ax_orig.set_title('Original')
-ax_orig.set_axis_off()
-ax_kernel.imshow(kernel, cmap='gray')
-ax_kernel.set_title('Gaussian kernel')
-ax_kernel.set_axis_off()
-ax_blurred.imshow(blurred)
-ax_blurred.set_title('Blurred')
-ax_blurred.set_axis_off()
+
+
+conv_F = im_F * target_F
+imEdge_F = im_F * edge_F
+targetEdge_F = target_F * edge_F
+
+convEdge_F = imEdge_F * targetEdge_F
+
+
+conv = np.fft.ifft2(conv_F)
+imEdge = np.fft.ifft2(imEdge_F)
+convEdge = np.absolute(np.fft.ifft2(convEdge_F))
+
+#imEdge = imEdge.real
+convFindMin = convEdge[110:990,110:690]
+indRaw = np.unravel_index(np.argmax(convFindMin, axis=None), convFindMin.shape)
+indAdj = [indRaw[0]+110, indRaw[1]+110]
+#plt.figure()
+#plt.imshow(np.absolute(conv))
 
 plt.figure()
-tempMatch = signal.fftconvolve(face, patch, mode='same')
-plt.imshow(tempMatch)
+plt.imshow(convEdge)
 
-fig.show()
+plt.figure()
+plt.imshow(im[indAdj[0]-100:indAdj[0], indAdj[1]-100:indAdj[1]])
+
+imEdge = np.absolute(imEdge)
+
+plt.figure()
+plt.imshow(imEdge)
+
+#thresh = 120
+#super_threshold_indices = imEdge < thresh
+#imEdge[super_threshold_indices] = 0
+#
+#plt.figure()
+#plt.imshow(imEdge)
+
