@@ -13,7 +13,7 @@ plt.close('all')
 
 
 
-gray = cv2.imread('training/wood/img103.jpg',0)
+gray = cv2.imread('training3/img002.jpg',0)
 
 # Smoothing without removing edges.
 gray_filtered = cv2.bilateralFilter(gray, 7, 50, 50)

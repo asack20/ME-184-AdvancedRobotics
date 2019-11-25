@@ -16,7 +16,7 @@ from convolve_func import convolve, vert_edge
 plt.close('all')
 
 
-imRaw = np.mean(imageio.imread('training/wood/img016.jpg'), axis=2)
+imRaw = np.mean(imageio.imread('training3/img002.jpg'), axis=2)
 patchRaw = np.mean(imageio.imread('training/wood_Template/patch018.jpg'), axis=2)
 
 conv_coord = convolve(imRaw, patchRaw)
