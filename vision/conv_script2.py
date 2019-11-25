@@ -21,9 +21,11 @@ import imageio
 from convolve_func import convolve, vert_edge, basic_conv
 import scipy.signal as sig
 from scipy.ndimage.filters import gaussian_filter
+import time
 
 plt.close('all')
 
+tic = time.time()
 
 imRaw = np.mean(imageio.imread('training3/img142.jpg'), axis=2)
 
@@ -70,6 +72,9 @@ pk2 = peaks[sorted_peaks[-2]]
 dist = abs(pk1 - pk2)
 print(dist)
 
+toc = time.time()
+print(toc-tic)
+
 plt.figure()
 plt.imshow(imOrg)
 
@@ -92,3 +97,5 @@ plt.plot(range(0,1280), eRow)
 plt.plot(pk1, eRow[pk1],'ro', pk2,eRow[pk2], 'ro')
 
 plt.show()
+toc = time.time()
+print(toc-tic)
