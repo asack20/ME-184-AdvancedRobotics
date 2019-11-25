@@ -23,9 +23,9 @@ Created on Mon Nov 18 19:18:09 2019
 #def __reset__(): get_ipython().magic('reset -sf')
 
 import numpy as np
-import imageio
-from convolve_func import convolve, vert_edge, basic_conv
-import scipy.signal as sig
+#import imageio
+from convolve_func import basic_conv
+from scipy.signal import find_peaks
 from scipy.ndimage.filters import gaussian_filter
 import picamera
 
