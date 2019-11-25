@@ -17,16 +17,16 @@ right = kit.servo[1];
 
 def open_gripper():
     left.angle = -90
-    right.ange = -90
+    right.angle = -90
     
-    return
+    return 0
 
 def close_gripper():
     dist = detectEdge();
     left.angle = 90
     right.angle = 90
     
-    return
+    return 0
 
 while True:
     command = ''
@@ -37,7 +37,7 @@ while True:
         time.sleep(2)
     elif command == 'o':
         print("Opening Gripper")
-        open_gripper
+        open_gripper()
         time.sleep(2)
     else:
         print("Invalid Command")
