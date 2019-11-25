@@ -16,7 +16,7 @@ left = kit.servo[0];
 right = kit.servo[1];
 
 def open_gripper():
-    left.angle = 180
+    left.angle = 150
     right.angle = 0
     
     return 0
