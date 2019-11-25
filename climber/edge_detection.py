@@ -24,8 +24,8 @@ Created on Mon Nov 18 19:18:09 2019
 
 import numpy as np
 #import imageio
-from convolve_func import basic_conv
-from scipy.signal import find_peaks
+#from convolve_func import basic_conv
+from scipy.signal import find_peaks, fftconvolve
 from scipy.ndimage.filters import gaussian_filter
 import picamera
 
@@ -59,7 +59,7 @@ def detectEdge():
     
     print("Thresholded Image")
     
-    im = basic_conv(imRaw, vertSob)
+    im = fftconvolve(imRaw, vertSob, mode='same')
     
     print("Convolved Image")
     
@@ -70,7 +70,7 @@ def detectEdge():
     eRow = im.sum(axis = 0) / 80
     eRow[0:5] = np.zeros((1,5))
     
-    peaks, _ = sig.find_peaks(eRow, distance = 250)
+    peaks, _ = find_peaks(eRow, distance = 250)
     
     sorted_peaks = np.argsort(eRow[peaks])
     if len(peaks) < 2:

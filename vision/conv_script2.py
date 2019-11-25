@@ -51,8 +51,8 @@ blur = [[1/16, 1/8, 1/16],[1/8, 1/4, 1/8],[1/16, 1/16,1/8]]
 
 sharp = [[0,-1,0],[-1,5,-1],[0,-1,0]]
 
-
-im = basic_conv(imRaw, vertSob)
+im = sig.fftconvolve(imRaw, vertSob, mode='same')
+#im = basic_conv(imRaw, vertSob)
 n = 80
 im[im < n] = 0
 im[im > n] = n
