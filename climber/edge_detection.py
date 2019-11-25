@@ -5,22 +5,6 @@ Created on Sun Nov 24 20:18:14 2019
 @author: Andrew
 """
 
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Nov 24 17:59:55 2019
-
-@author: Andrew
-"""
-
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Nov 18 19:18:09 2019
-
-@author: Andrew
-"""
-
-#from IPython import get_ipython
-#def __reset__(): get_ipython().magic('reset -sf')
 
 import numpy as np
 #import imageio

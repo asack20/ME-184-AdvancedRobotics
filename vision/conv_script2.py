@@ -29,6 +29,9 @@ tic = time.time()
 
 imRaw = np.mean(imageio.imread('training3/img142.jpg'), axis=2)
 
+imSmall = imRaw[0:100,590:690]
+
+
 imOrg = np.copy(imRaw)
 
 imBlur = gaussian_filter(imRaw, sigma=4)
