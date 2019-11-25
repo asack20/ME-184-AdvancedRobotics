@@ -29,10 +29,20 @@ from scipy.signal import find_peaks, fftconvolve
 from scipy.ndimage.filters import gaussian_filter
 import picamera
 
-with picamera.PiCamera() as camera:
-	output = np.empty((720, 1280, 3), dtype=np.uint8)
-	camera.capture(output, 'rgb')
-
+def closestMaterial(im):
+    im_color = np.mean(im, axis = (0,1))
+    cName = ['wood','carpet','brick','metal','tree']
+    rgb_ref = np.array([[137, 131, 114],[104,90,74],[106,122,125],[117, 141, 153],[123,123,117]])
+    
+    cDist = np.zeros((5))
+    for i in range(0,5):
+        cDist[i] = np.sqrt(np.square(im_color[0] - rgb_ref[i,0]) +  np.square(im_color[1] - rgb_ref[i,1]) + np.square(im_color[2] - rgb_ref[i,2])   )
+    
+    minDist = np.min(cDist)
+    minInd = np.argmin(cDist)
+    mat = cName[minInd]
+    
+    return mat
 
 
 def detectEdge():
@@ -41,6 +51,10 @@ def detectEdge():
         output = np.empty((720, 1280, 3), dtype=np.uint8)
         camera.capture(output, 'rgb')
     print("Took Image")
+    
+    print("Computing Material")
+    mat = closestMaterial(output[0:100,590:690,:])
+    print(mat)
     
     imPic = np.mean(output, axis=2)
 
