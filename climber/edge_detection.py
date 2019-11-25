@@ -84,5 +84,5 @@ def detectEdge():
     
     return dist
 
-while True:
-    detectEdge()
+#while True:
+#    detectEdge()
