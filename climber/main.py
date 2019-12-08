@@ -31,27 +31,27 @@ tail = kit.servo[7];
 
 def open_top_gripper():
     TL.angle = 150
-    TR.angle = 0
+    TR.angle = 30
     
     return 0
 
 def close_top_gripper():
     #dist = detectEdge();
     TL.angle = 0
-    TR.angle = 150
+    TR.angle = 180
     
     return 0
 
 def open_bottom_gripper():
     BL.angle = 150
-    BR.angle = 0
+    BR.angle = 30
     
     return 0
 
 def close_bottom_gripper():
     #dist = detectEdge();
     BL.angle = 0
-    BR.angle = 150
+    BR.angle = 180
     
     return 0
 
@@ -59,7 +59,7 @@ def expand():
     CR.throttle = -0.5
     CL.throttle = -0.5
     
-    time.sleep(25)
+    time.sleep(30)
     
     CR.throttle = 0
     CL.throttle = 0
