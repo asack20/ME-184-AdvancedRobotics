@@ -5,8 +5,8 @@ Created on Mon Nov 25 11:38:04 2019
 @author: Andrew
 """
 
-from edge_detection import detectEdge
-import numpy as np
+#from edge_detection import detectEdge
+#import numpy as np
 from adafruit_servokit import ServoKit
 import time
 import RPi.GPIO as GPIO
@@ -83,7 +83,9 @@ def zero_motion():
     CL.throttle = 0
 
     open_bottom_gripper()
+    time.sleep(2)
     open_top_gripper()
+    time.sleep(2)
 
     return 0
 
