@@ -38,7 +38,7 @@ def open_top_gripper():
 def close_top_gripper():
     #dist = detectEdge();
     TL.angle = 0
-    TR.angle = 180
+    TR.angle = 150
     
     return 0
 
@@ -51,7 +51,7 @@ def open_bottom_gripper():
 def close_bottom_gripper():
     #dist = detectEdge();
     BL.angle = 0
-    BR.angle = 180
+    BR.angle = 150
     
     return 0
 
@@ -59,7 +59,7 @@ def expand():
     CR.throttle = -0.5
     CL.throttle = -0.5
     
-    time.sleep(5)
+    time.sleep(25)
     
     CR.throttle = 0
     CL.throttle = 0
@@ -126,7 +126,7 @@ while keep_going:
 
     elif command == 's':
         print("Stopping")
-        keep_going = false
+        keep_going = False
         zero_motion()
         time.sleep(2)
     else:
