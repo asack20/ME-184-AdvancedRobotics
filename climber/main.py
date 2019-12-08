@@ -34,7 +34,7 @@ def open_top_gripper():
     return 0
 
 def close_top_gripper():
-    dist = detectEdge();
+    #dist = detectEdge();
     TL.angle = 0
     TR.angle = 180
     
@@ -47,7 +47,7 @@ def open_bottom_gripper():
     return 0
 
 def close_bottom_gripper():
-    dist = detectEdge();
+    #dist = detectEdge();
     BL.angle = 0
     BR.angle = 180
     
