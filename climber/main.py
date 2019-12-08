@@ -13,19 +13,21 @@ import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)#Button to GPIO23
-open_button = 23
-closed_button = 24 
+#open_button = 23
+closed_button = 23 
 
 kit = ServoKit(channels=16) #specify model being used (16 port version)
 
-TL = kit.servo[0];
-TR = kit.servo[1];
+TL = kit.servo[8];
+TR = kit.servo[9];
 
-BL = kit.servo[2];
-BR = kit.servo[3];
+BL = kit.servo[4];
+BR = kit.servo[5];
 
-CL = kit.continuous_servo[4];
-CR = kit.continuous_servo[5];
+CL = kit.continuous_servo[0];
+CR = kit.continuous_servo[1];
+
+tail = kit.servo[7];
 
 def open_top_gripper():
     TL.angle = 150
@@ -54,11 +56,10 @@ def close_bottom_gripper():
     return 0
 
 def expand():
-    button_pressed = not GPIO.input(open_button)
-    while not button_pressed:
-        CR.throttle = 0.5
-        CL.throttle = 0.5
-        button_pressed = not GPIO.input(open_button)
+    CR.throttle = 0.5
+    CL.throttle = 0.5
+    
+    time.sleep(5)
     
     CR.throttle = 0
     CL.throttle = 0
