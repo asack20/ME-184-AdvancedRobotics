@@ -56,8 +56,8 @@ def close_bottom_gripper():
     return 0
 
 def expand():
-    CR.throttle = -0.5
-    CL.throttle = -0.5
+    CR.throttle = -1
+    CL.throttle = -1
     
     time.sleep(30)
     
@@ -69,8 +69,8 @@ def expand():
 def contract():
     button_pressed = not GPIO.input(closed_button)
     while not button_pressed:
-        CR.throttle = 0.5
-        CL.throttle = 0.5
+        CR.throttle = 1
+        CL.throttle = 1
         button_pressed = not GPIO.input(closed_button)
     
     CR.throttle = 0
