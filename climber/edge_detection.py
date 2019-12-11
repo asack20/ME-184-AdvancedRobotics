@@ -7,12 +7,11 @@ Created on Sun Nov 24 20:18:14 2019
 
 
 import numpy as np
-#import imageio
-#from convolve_func import basic_conv
 from scipy.signal import find_peaks, fftconvolve
 from scipy.ndimage.filters import gaussian_filter
 import picamera
 
+# Perform material detection
 def closestMaterial(im):
     im_color = np.mean(im, axis = (0,1))
     cName = ['wood','carpet','brick','metal','tree']
@@ -28,7 +27,7 @@ def closestMaterial(im):
     
     return mat
 
-
+# Perform edge detection and call material detection
 def detectEdge():
     print("Detecting Edge")
     with picamera.PiCamera() as camera:
